@@ -1,6 +1,6 @@
 export class ApiHelper {
     static localUrl = 'http://localhost:5000';
-    static prodUrl = 'https://blockchain-front-seven.vercel.app';
+    static prodUrl = 'https://blockchain-backend.vercel.app';
     static api = '/api';
 
     static get baseUrl(){
