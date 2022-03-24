@@ -1,26 +1,26 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <button @click="getSymbols">Get</button>
+    <div v-if="symbols">
+        <div v-for="(key,value) in symbols" :key="key">{{value}}</div>
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import BlockchainService from "@/services/BlockchainService";
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
+    data: () => ({
+        symbols: null,
+    }),
+    methods: {
+     async getSymbols(){
+         const res =  await BlockchainService.getSymbols();
+         if (res.isSuccess) this.symbols = res.result;
+      }
+    }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
