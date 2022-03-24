@@ -8,11 +8,9 @@ const blockChain = {
     actions: {
         async loadSymbols(me){
             me.state.loading = true;
-            setTimeout(async ()=>{
-                const res = await BlockchainService.getSymbols();
-                if (res.isSuccess) me.state.symbols = res.result;
-                me.state.loading = false;
-            },3000)
+            const res = await BlockchainService.getSymbols();
+            if (res.isSuccess) me.state.symbols = res.result;
+            me.state.loading = false;
         }
     }
 }

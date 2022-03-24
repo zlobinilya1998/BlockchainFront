@@ -1,27 +1,20 @@
 <template>
-    <div>
-        <div v-if="loading">Loading</div>
-        <div v-if="symbols">
-            <div v-for="(key,value) in symbols" :key="key">{{ value }}</div>
-        </div>
+    <div class="app">
+        123
     </div>
 </template>
 
 <script>
 export default {
-    name: 'App',
-    computed: {
-        symbols() {
-            return this.$store.state.blockchainModule.symbols;
-        },
-        loading() {
-            return this.$store.state.blockchainModule.loading;
-        }
-    },
-    async mounted() {
-        await this.$store.dispatch('loadSymbols');
-    }
 
 }
 </script>
+
+<style>
+body {
+    margin: 0 !important;
+    background: #000000;
+    color: white;
+}
+</style>
 
