@@ -15,7 +15,7 @@
                 <div class="symbol" v-for="(symbol,index) in symbols" :key="index">
                     <p>Валюта: <span style="color: darkseagreen;font-weight: bold" v-html="symbol.base_currency"/></p>
                     <p>Минимальное кол-во для заказа: {{symbol.min_order_size.toLocaleString()}}</p>
-                    <div>Статус: <span :style="{color: statuses[symbol.status].color}" v-html="statuses[symbol.status].text"/></div>
+                    <div>Статус: <span :style="{color: getStatus(symbol.status).color}" v-html="getStatus(symbol.status).text"/></div>
                     <button v-if="symbol.status === 'open'" style="padding: 10px;cursor: pointer;margin: 20px auto 0">
                         Приобрести
                         <i class="ci ci-tag"/>
@@ -27,22 +27,11 @@
 </template>
 
 <script setup>
-import {computed,onMounted} from "vue";
+import {computed, onMounted} from "vue";
 import {useStore} from "vuex";
+import { getStatus } from "@/models/Entities/Symbols.ts";
 
 const store = useStore();
-const statuses = {
-    open: {
-        icon: 'checkmark',
-        text: 'открыт',
-        color: '#31cd31',
-    },
-    close: {
-        icon: 'cancel',
-        text: 'закрыт',
-        color: 'red',
-    },
-}
 const loadSymbols = () => store.dispatch('loadSymbols');
 
 const symbols = computed(()=> store.state.blockchainModule.symbols);
@@ -52,15 +41,16 @@ onMounted(loadSymbols)
 </script>
 
 
-<style>
+<style lang="scss">
 .symbols-wrapper {
     display: grid;
     grid-template-columns: repeat(4,1fr);
     grid-gap: 25px;
+    .symbol {
+        border-radius: 10px;
+        padding: 20px;
+        background: #42414d;
+    }
 }
-.symbol {
-    border-radius: 10px;
-    padding: 20px;
-    background: #42414d;
-}
+
 </style>
