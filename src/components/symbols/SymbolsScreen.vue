@@ -16,7 +16,7 @@
                     <p>Валюта: <span style="color: darkseagreen;font-weight: bold" v-html="symbol.base_currency"/></p>
                     <p>Минимальное кол-во для заказа: {{symbol.min_order_size.toLocaleString()}}</p>
                     <div>Статус: <span :style="{color: getStatus(symbol.status).color}" v-html="getStatus(symbol.status).text"/></div>
-                    <button v-if="symbol.status === 'open'" style="padding: 10px;cursor: pointer;margin: 20px auto 0">
+                    <button v-if="symbol.status === Status.open" style="padding: 10px;cursor: pointer;margin: 20px auto 0">
                         Приобрести
                         <i class="ci ci-tag"/>
                     </button>
@@ -26,15 +26,15 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {computed, onMounted} from "vue";
 import {useStore} from "vuex";
-import { getStatus } from "@/models/Entities/Symbols.ts";
+import {Currency, getStatus, Status,} from "@/models/Entities/Symbols";
 
 const store = useStore();
 const loadSymbols = () => store.dispatch('loadSymbols');
 
-const symbols = computed(()=> store.state.blockchainModule.symbols);
+const symbols = computed<Currency[]>(() => store.state.blockchainModule.symbols);
 const loading = computed(() => store.state.blockchainModule.loading);
 
 onMounted(loadSymbols)
