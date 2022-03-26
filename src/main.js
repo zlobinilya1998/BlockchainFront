@@ -5,4 +5,17 @@ import App from './App.vue'
 import store from "@/store/store";
 import router from './router'
 
-createApp(App).use(router).use(store).mount('#app')
+const app = createApp(App);
+
+import CBtn from '@/components/shared/c-btn';
+import CIcon from '@/components/shared/c-icon';
+import CLoader from '@/components/shared/c-loader';
+
+
+
+app.component('c-btn', CBtn);
+app.component('c-icon', CIcon);
+app.component('c-loader', CLoader);
+
+
+app.use(router).use(store).mount('#app')

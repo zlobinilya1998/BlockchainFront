@@ -1,22 +1,22 @@
 <template>
     <div class="about">
         <h1>Страница офферов</h1>
-        <button @click="$router.push({name:'icons'})" style="margin-right: 10px" class="btn">
+        <c-btn @click="$router.push({name:'icons'})" style="margin-right: 10px">
             Страница иконок
-            <i class="ci ci-forward"/>
-        </button>
-        <button @click="loadSymbols" class="btn">
+            <c-icon v-html="'ci-forward'"/>
+        </c-btn>
+        <c-btn @click="loadSymbols">
             Загрузить
-            <i class="ci ci-refresh"/>
-        </button>
+            <c-icon v-html="'ci-refresh'"/>
+        </c-btn>
         <div style="margin-top: 25px">
-            <CustomLoader v-if="loading"/>
+            <c-loader v-if="loading"/>
             <div v-else-if="symbols" class="symbols-wrapper">
                 <div class="symbol" v-for="(symbol,index) in symbols" :key="index">
                     <p>Валюта: <span style="color: darkseagreen;font-weight: bold" v-html="symbol.base_currency"/></p>
                     <p>Минимальное кол-во для заказа: {{symbol.min_order_size.toLocaleString()}}</p>
                     <div>Статус: <span :style="{color: statuses[symbol.status].color}" v-html="statuses[symbol.status].text"/></div>
-                    <button v-if="symbol.status == 'open'" style="padding: 10px;cursor: pointer;margin: 20px auto 0">
+                    <button v-if="symbol.status === 'open'" style="padding: 10px;cursor: pointer;margin: 20px auto 0">
                         Приобрести
                         <i class="ci ci-tag"/>
                     </button>
@@ -26,9 +26,11 @@
     </div>
 </template>
 
-<script lang="js">
+<script setup>
+import {computed,onMounted} from "vue";
+import {useStore} from "vuex";
 
-import CustomLoader from "@/components/shared/CustomLoader";
+const store = useStore();
 const statuses = {
     open: {
         icon: 'checkmark',
@@ -41,31 +43,12 @@ const statuses = {
         color: 'red',
     },
 }
+const loadSymbols = () => store.dispatch('loadSymbols');
 
-const SymbolsScreen = {
-    components: {CustomLoader},
-    data: () => ({
-        statuses,
-    }),
-    computed: {
-        symbols(){
-            return this.$store.state.blockchainModule.symbols;
-        },
-        loading(){
-            return this.$store.state.blockchainModule.loading;
-        }
-    },
-    mounted(){
-        this.loadSymbols();
-    },
-    methods: {
-        loadSymbols(){
-            this.$store.dispatch('loadSymbols');
-        }
-    }
-}
+const symbols = computed(()=> store.state.blockchainModule.symbols);
+const loading = computed(() => store.state.blockchainModule.loading);
 
-export default SymbolsScreen
+onMounted(loadSymbols)
 </script>
 
 
