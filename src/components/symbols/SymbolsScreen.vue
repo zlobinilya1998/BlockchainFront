@@ -1,8 +1,14 @@
 <template>
     <div class="about">
         <h1>This is an about page</h1>
-        <div >
-            <div v-if="loading">Loading</div>
+        <button @click="$router.push({name:'icons'})">
+            Страница иконок
+            <i class="ci ci-forward"/>
+        </button>
+        <div>
+            <div v-if="loading" class="rotated" style="width: max-content">
+                <i class="ci ci-refresh" style="font-size: 36px"/>
+            </div>
             <div v-else-if="symbols" class="symbols-wrapper">
                 <div class="symbol" v-for="(symbol,index) in symbols" :key="index">{{symbol}}</div>
             </div>
