@@ -10,5 +10,9 @@ export const statuses = {
         color: 'red',
     },
 }
-export const getStatus = status => statuses[status];
+export const getStatus = (status: Status) => statuses[status];
 
+export enum Status {
+    open= 'open',
+    close = 'close',
+}

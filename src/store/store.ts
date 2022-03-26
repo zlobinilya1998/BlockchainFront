@@ -1,20 +1,14 @@
 import { createStore } from 'vuex'
 import blockchainModule from "@/store/blockchainModule";
 
+export class RootState {}
+
+
 const store = createStore({
-    state () {
-        return {
-            count: 0
-        }
-    },
+    state: new RootState(),
     modules: {
         blockchainModule,
     },
-    mutations: {
-        increment (state) {
-            state.count++
-        }
-    }
 })
 
 export default store;

@@ -7,9 +7,9 @@ import router from './router'
 
 const app = createApp(App);
 
-import CBtn from '@/components/shared/c-btn';
-import CIcon from '@/components/shared/c-icon';
-import CLoader from '@/components/shared/c-loader';
+import CBtn from '@/components/shared/c-btn.vue';
+import CIcon from '@/components/shared/c-icon.vue';
+import CLoader from '@/components/shared/c-loader.vue';
 
 
 
