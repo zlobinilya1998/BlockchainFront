@@ -1,7 +1,7 @@
 import BlockchainService from "@/services/BlockchainService/BlockchainService";
 import { ActionContext } from "vuex";
 import { RootState } from "@/store/store";
-import {Currency} from "@/models/Entities/Currency";
+import {Currency} from "@/models/Entities/Symbols";
 
 class BlockChainState {
     loading: boolean = false;
