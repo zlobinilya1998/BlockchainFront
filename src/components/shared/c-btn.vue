@@ -1,5 +1,5 @@
 <template>
-    <button class="btn" :class="{inverted}">
+    <button class="btn" :class="{inverted}" :style="{width: block ? '100%' : ''}">
         <slot/>
     </button>
 </template>
@@ -8,9 +8,8 @@
 import {defineProps} from "vue";
 
 defineProps({
-    inverted: {
-        type: Boolean,
-    }
+    block: Boolean,
+    inverted: Boolean,
 })
 </script>
 
@@ -24,9 +23,11 @@ defineProps({
     border: 1px solid transparent;
 }
 .btn.inverted {
-    color: red;
+    background:white;
+    border: 1px solid #42414d;
+    color: #42414d;
 }
-.btn:hover {
+.btn:not(.inverted):hover {
     background:white;
     border: 1px solid #42414d;
     color: #42414d;
