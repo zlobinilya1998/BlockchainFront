@@ -16,7 +16,11 @@ const blockChain = {
             const res = await BlockchainService.getSymbols();
             if (res.isSuccess) me.state.symbols = res.result;
             me.state.loading = false;
-        }
+        },
+        async getSymbolInfo(me: ActionContext<BlockChainState, RootState>, symbol: string){
+            const res = await BlockchainService.getSymbolInfo(symbol);
+            if (res.isSuccess) return res.result;
+        },
     }
 }
 
