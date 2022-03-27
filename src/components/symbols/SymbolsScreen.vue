@@ -36,7 +36,7 @@
 import {computed, onMounted} from "vue";
 import {useStore} from "vuex";
 import { useRouter } from 'vue-router'
-import {Currency, getStatus, Status,} from "@/models/Entities/Symbols";
+import {Currency, getStatus, Status,} from "@/models/Entities/Currency";
 
 const router = useRouter();
 const store = useStore();
