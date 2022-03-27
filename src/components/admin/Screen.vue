@@ -1,5 +1,4 @@
 <template>
-    <div>Admin screen</div>
     <router-view/>
 </template>
 
