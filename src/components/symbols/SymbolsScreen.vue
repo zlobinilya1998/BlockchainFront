@@ -5,8 +5,6 @@
             Загрузить
             <c-icon v-html="'ci-refresh'"/>
         </c-btn>
-        <c-select :items="selectItems" itemTitle="text" itemValue="value" :value="selectModel" @input="e => selectModel = e" style="margin-right: 10px"/>
-        <c-input @input="v => input = v" :value="input"/>
         <div style="margin-top: 25px">
             <c-loader v-if="loading"/>
             <div v-else-if="symbols" class="symbols-wrapper">
@@ -31,24 +29,15 @@
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted} from "vue";
 import {useStore} from "vuex";
 import {useRouter} from 'vue-router'
 import {Currency, getStatus, Status,} from "@/models/Entities/Currency";
-import CInput from "@/components/shared/c-input.vue";
 
 const router = useRouter();
 const store = useStore();
 const loadSymbols = () => store.dispatch('loadSymbols');
 
-const selectItems = [
-    {value: '',text: 'Все'},
-    {value: Status.open,text: 'Открытые'},
-    {value: Status.close,text: 'Закрытые'},
-]
-const selectModel = ref(selectItems[0])
-
-const input = ref<string>('');
 const openSymbolInfo = (symbol: Currency) => {
     router.push({
         name: 'symbolInfo',
@@ -59,9 +48,6 @@ const openSymbolInfo = (symbol: Currency) => {
 }
 
 const symbols = computed<Currency[]>(() => store.state.blockchainModule.symbols);
-
-
-
 const loading = computed(() => store.state.blockchainModule.loading);
 
 onMounted(loadSymbols)
