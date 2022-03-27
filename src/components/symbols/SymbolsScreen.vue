@@ -16,14 +16,16 @@
                     <p>Валюта: <span style="color: darkseagreen;font-weight: bold" v-html="symbol.base_currency"/></p>
                     <p>Минимальное кол-во для заказа: {{symbol.min_order_size.toLocaleString()}}</p>
                     <div>Статус: <span :style="{color: getStatus(symbol.status).color}" v-html="getStatus(symbol.status).text"/></div>
-                    <button v-if="symbol.status === Status.open" style="padding: 10px;cursor: pointer;margin: 20px auto 0">
-                        Приобрести
-                        <i class="ci ci-tag"/>
-                    </button>
-                    <c-btn @click="openSymbolInfo(symbol)">
-                        Подробнее
-                        <c-icon v-html="'ci-info'"/>
-                    </c-btn>
+                    <div style="margin: 20px auto 0;display: flex;justify-content: space-between">
+                        <c-btn @click="openSymbolInfo(symbol)">
+                            Подробнее
+                            <c-icon v-html="'ci-info'"/>
+                        </c-btn>
+                        <button v-if="symbol.status === Status.open" style="padding: 10px;cursor: pointer">
+                            Приобрести
+                            <i class="ci ci-tag"/>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
