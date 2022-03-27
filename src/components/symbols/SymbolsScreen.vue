@@ -5,10 +5,11 @@
             Страница иконок
             <c-icon v-html="'ci-forward'"/>
         </c-btn>
-        <c-btn @click="loadSymbols">
+        <c-btn @click="loadSymbols" style="margin-right: 10px">
             Загрузить
             <c-icon v-html="'ci-refresh'"/>
         </c-btn>
+        <c-select :items="selectItems" itemTitle="text" itemValue="value" :value="selectModel" @input="e => selectModel = e"/>
         <div style="margin-top: 25px">
             <c-loader v-if="loading"/>
             <div v-else-if="symbols" class="symbols-wrapper">
@@ -33,14 +34,21 @@
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted} from "vue";
+import {computed, onMounted, ref} from "vue";
 import {useStore} from "vuex";
-import { useRouter } from 'vue-router'
+import {useRouter} from 'vue-router'
 import {Currency, getStatus, Status,} from "@/models/Entities/Currency";
 
 const router = useRouter();
 const store = useStore();
 const loadSymbols = () => store.dispatch('loadSymbols');
+
+const selectItems = [
+    {value: '',text: 'Все',},
+    {value: Status.open,text: 'Открытые',},
+    {value: Status.close,text: 'Закрытые',},
+]
+const selectModel = ref(selectItems[0]);
 
 const openSymbolInfo = (symbol: Currency) => {
     router.push({

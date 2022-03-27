@@ -13,7 +13,7 @@ export const statuses = {
 export const getStatus = (status: Status) => statuses[status];
 
 export enum Status {
-    open= 'open',
+    open = 'open',
     close = 'close',
 }
 
