@@ -7,7 +7,7 @@ export const statuses = {
     close: {
         icon: 'cancel',
         text: 'закрыт',
-        color: 'red',
+        color: '#e20853',
     },
 }
 export const getStatus = (status: Status) => statuses[status];
@@ -16,7 +16,6 @@ export enum Status {
     open = 'open',
     close = 'close',
 }
-
 
 export type Currency = {
     base_currency: string,

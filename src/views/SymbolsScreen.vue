@@ -5,6 +5,7 @@
             Загрузить
             <c-icon v-html="'ci-refresh'"/>
         </c-btn>
+        <c-select v-if="selectList.length > 0" :items="selectList" item-title="text" item-value="value" :value="selectModel" @input="handleSelectInput"/>
         <div style="margin-top: 25px">
             <c-loader v-if="loading"/>
             <div v-else-if="symbols" class="symbols-wrapper">
@@ -29,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted} from "vue";
+import {computed, onMounted, ref} from "vue";
 import {useStore} from "vuex";
 import {useRouter} from 'vue-router'
 import {Currency, getStatus, Status,} from "@/models/Entities/Currency";
@@ -37,6 +38,7 @@ import {Currency, getStatus, Status,} from "@/models/Entities/Currency";
 const router = useRouter();
 const store = useStore();
 const loadSymbols = () => store.dispatch('loadSymbols');
+const loadSelectList = () => store.dispatch('getSymbolsList');
 
 const openSymbolInfo = (symbol: Currency) => {
     router.push({
@@ -46,11 +48,16 @@ const openSymbolInfo = (symbol: Currency) => {
         }
     })
 }
-
 const symbols = computed<Currency[]>(() => store.state.blockchainModule.symbols);
+const selectList = computed<[]>(() => store.state.blockchainModule.selectList);
+const handleSelectInput = (v: any) => selectModel.value = v;
+let selectModel = ref(null);
 const loading = computed(() => store.state.blockchainModule.loading);
 
-onMounted(loadSymbols)
+onMounted(async () => {
+    await loadSymbols();
+    await loadSelectList();
+} )
 </script>
 
 
@@ -65,5 +72,4 @@ onMounted(loadSymbols)
         background: #42414d;
     }
 }
-
 </style>

@@ -6,6 +6,7 @@ import {Currency} from "@/models/Entities/Currency";
 class BlockChainState {
     loading: boolean = false;
     symbols: Currency[] = [];
+    selectList: [] = [];
 }
 
 const blockChain = {
@@ -21,6 +22,10 @@ const blockChain = {
             const res = await BlockchainService.getSymbolInfo(symbol);
             if (res.isSuccess) return res.result;
         },
+        async getSymbolsList(me: ActionContext<BlockChainState, RootState>){
+            me.state.selectList = await BlockchainService.getSymbolsList();
+            return me.state.selectList;
+        }
     }
 }
 

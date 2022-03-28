@@ -10,4 +10,8 @@ export default class BlockchainService {
         const { data } = await $api.get(this.baseUrl + `/symbols/${symbol}`)
         return data;
     }
+    static async getSymbolsList(){
+        const { data } = await $api.get(this.baseUrl + `/symbolsList`)
+        return data.result;
+    }
 }
