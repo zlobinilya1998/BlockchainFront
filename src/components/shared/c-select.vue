@@ -45,7 +45,7 @@ onMounted(forceSelect)
     min-width: 100px;
 }
 .ci-select-items {
-    max-height: 22ц0px;
+    max-height: 220px;
     overflow-y: scroll;
     scrollbar-width: thin;
 }
