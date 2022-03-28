@@ -1,14 +1,13 @@
-import {DefaultResult} from "@/helpers";
-import {ApiHelper} from "@/services/Infrastructure/ApiHelper";
+import $api from "@/services/Infrastructure/Api";
 
 export default class BlockchainService {
-    static baseUrl = ApiHelper.apiUrl + '/bc'
+    static baseUrl = $api.defaults.baseURL + '/bc';
     static async getSymbols(){
-       const res = await fetch(this.baseUrl + '/symbols');
-       return DefaultResult(res);
+        const { data } = await $api.get(this.baseUrl + '/symbols');
+        return data;
     }
     static async getSymbolInfo(symbol: string){
-        const res = await fetch(this.baseUrl + `/symbols/${symbol}`);
-        return DefaultResult(res);
+        const { data } = await $api.get(this.baseUrl + `/symbols/${symbol}`)
+        return data;
     }
 }

@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import SymbolsScreen from "@/components/symbols/SymbolsScreen.vue";
+import SymbolsScreen from "@/views/SymbolsScreen.vue";
 import AdminScreen from "@/components/admin/Screen.vue"
-import SymbolScreen from "@/components/symbols/SymbolScreen.vue"
+import SymbolScreen from "@/views/SymbolScreen.vue"
 import IconsScreen from "@/components/admin/IconsScreen.vue";
 
 const routes = [

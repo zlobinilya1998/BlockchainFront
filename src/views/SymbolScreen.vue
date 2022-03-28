@@ -8,19 +8,20 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {onMounted, ref} from "vue";
 import {useStore} from "vuex";
 import {useRoute} from "vue-router";
+import {Currency} from "@/models/Entities/Currency";
 
 const store = useStore();
 const route = useRoute();
 
 const loading = ref(false);
-const symbol = ref({});
+const symbol = ref<Currency>({});
 const loadSymbolInfo = async () => {
     loading.value = true;
-    symbol.value = await store.dispatch('getSymbolInfo', route.params.symbol);
+    symbol.value  = await store.dispatch('getSymbolInfo', route.params.symbol);
     loading.value = false;
 }
 onMounted(loadSymbolInfo)

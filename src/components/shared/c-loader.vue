@@ -1,6 +1,6 @@
 <template>
     <div class="rotated" style="width: max-content;margin: 20px auto">
-        <i class="ci ci-refresh" style="font-size: 36px"/>
+        <c-icon v-html="'ci-refresh'"  style="font-size: 36px"/>
     </div>
 </template>
 
