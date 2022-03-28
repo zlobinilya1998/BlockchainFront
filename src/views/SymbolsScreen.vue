@@ -5,7 +5,9 @@
             Загрузить
             <c-icon v-html="'ci-refresh'"/>
         </c-btn>
-        <c-select v-if="selectList.length > 0" :items="selectList" item-title="text" item-value="value" :value="selectModel" @input="handleSelectInput"/>
+        <transition name="fade" appear>
+            <c-select v-if="selectList.length > 0" :items="selectList" item-title="text" item-value="value" :value="selectModel" @input="handleSelectInput"/>
+        </transition>
         <div style="margin-top: 25px">
             <c-loader v-if="loading"/>
             <div v-else-if="symbols" class="symbols-wrapper">
