@@ -1,8 +1,8 @@
 <template>
     <div style="display: inline-block;position: relative">
-        <input class="c-input" @input="onInput" :value="props.value" :placeholder="props.placeholder"/>
+        <input class="c-input" @input="onInput" :value="props.modelValue" :placeholder="props.placeholder"/>
         <transition name="fade" appear mode="out-in">
-            <c-icon v-if="value" v-html="'ci-cancel'" class="close-icon" @click="clearInput"/>
+            <c-icon v-if="props.modelValue" v-html="'ci-cancel'" class="close-icon" @click="clearInput"/>
         </transition>
     </div>
 </template>
@@ -11,14 +11,14 @@
 import {defineEmits, defineProps} from "vue";
 
 interface Props {
-    value: any,
     placeholder?: string,
+    modelValue: string,
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits(['input'])
-const onInput = (e: any) => emit("input", e.target.value)
-const clearInput = () => emit('input', '')
+const emit = defineEmits(['update:modelValue'])
+const onInput = (e: any) => emit("update:modelValue", e.target.value)
+const clearInput = () => emit('update:modelValue', '')
 
 </script>
 
@@ -46,6 +46,7 @@ const clearInput = () => emit('input', '')
     transition: .3s;
     font-size: 14px;
 }
+
 .close-icon:hover {
     color: red;
 }

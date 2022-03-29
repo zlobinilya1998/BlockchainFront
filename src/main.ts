@@ -1,4 +1,4 @@
-import './assets/style.scss';
+import './assets/style.css';
 import './assets/custom-icons.css';
 import { createApp } from 'vue'
 import App from './App.vue'

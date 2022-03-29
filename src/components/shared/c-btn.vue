@@ -13,7 +13,7 @@ defineProps({
 })
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .btn {
     padding: 10px;
     background: #42414d;

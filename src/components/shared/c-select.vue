@@ -1,6 +1,6 @@
 <template>
     <div class="ci-select">
-        <c-btn block v-if="value" @click="toggleVisibility" v-html="value[itemTitle]" :class="{'inverted': showItems}"/>
+        <c-btn block v-if="modelValue" @click="toggleVisibility" v-html="modelValue[itemTitle]" :class="{'inverted': showItems}"/>
         <transition name="slide-fade" appear mode="out-in">
             <div class="ci-select-items" v-if="showItems" style="position: absolute;width: 100%;transition: all .3s ease;margin-top: 10px;">
                 <c-btn block v-for="(option,index) in items" :key="index" @click="selectItem(option)" v-html="option[itemTitle]"/>
@@ -16,18 +16,18 @@ interface Props {
     items: {}[],
     itemTitle: string,
     itemValue: any,
-    value: any,
+    modelValue: any,
 }
 const props = defineProps<Props>();
-const emit = defineEmits(['input'])
+const emit = defineEmits(['update:modelValue'])
 
 const showItems = ref(false)
 const toggleVisibility = () => showItems.value = !showItems.value;
 
 const forceSelect = () => selectItem(items.value[0])
-const {itemTitle,items, value} = toRefs(props);
+const {itemTitle,items, modelValue} = toRefs(props);
 const selectItem = (item: any) => {
-    emit('input', item);
+    emit('update:modelValue', item);
     showItems.value = false;
 }
 

@@ -1,6 +1,6 @@
 <template>
     <div class="c-radio">
-        <c-btn v-for="(item,index) in items" :key="index" v-html="item[itemTitle]" @click="selectItem(item)" :class="{'inverted': value.value === item[itemValue]}"/>
+        <c-btn v-for="(item,index) in items" :key="index" v-html="item[itemTitle]" @click="selectItem(item)" :class="{'inverted': modelValue && modelValue.value === item[itemValue]}"/>
     </div>
 </template>
 
@@ -11,15 +11,14 @@ interface Props {
     items: {}[],
     itemTitle: string,
     itemValue: any,
-    value: any,
+    modelValue: any,
 }
 const props = defineProps<Props>();
-const emit = defineEmits(['input'])
+const emit = defineEmits(['update:modelValue'])
 
-const {itemTitle,items,value} = toRefs(props);
-const selectItem = (item: any) => emit('input', item);
+const {itemTitle,items, modelValue} = toRefs(props);
+const selectItem = (item: any) => emit('update:modelValue', item);
 const forceSelect = () => selectItem(items.value[0])
-
 onMounted(forceSelect)
 </script>
 
