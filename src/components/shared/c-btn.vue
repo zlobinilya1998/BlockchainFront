@@ -1,16 +1,20 @@
 <template>
-    <button class="btn" :class="{inverted}" :style="{width: block ? '100%' : ''}">
+    <button class="btn" :class="{'inverted': props.inverted, 'noHover': props.noHover}" :style="{width: props.block ? '100%' : ''}">
         <slot/>
     </button>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {defineProps} from "vue";
 
-defineProps({
-    block: Boolean,
-    inverted: Boolean,
-})
+interface Props {
+    block: boolean,
+    inverted: boolean,
+    noHover: boolean,
+}
+
+const props = defineProps<Props>()
+
 </script>
 
 <style scoped>
@@ -27,7 +31,7 @@ defineProps({
     border: 1px solid #42414d;
     color: #42414d;
 }
-.btn:not(.inverted):hover {
+.btn:not(.inverted):not(.noHover):hover {
     background:white;
     border: 1px solid #42414d;
     color: #42414d;
