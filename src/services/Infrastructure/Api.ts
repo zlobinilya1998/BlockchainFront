@@ -7,9 +7,16 @@ const $api = axios.create({
 })
 $api.defaults.timeout = 30_000;
 $api.interceptors.request.use((config) => {
+    const token = localStorage.getItem('token');
     // @ts-ignore
-    config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
+    if (token) config.headers.Authorization = `Bearer ${token}`
     return config;
+})
+$api.interceptors.response.use((responce)=>{
+    if (responce.status === 401){
+        localStorage.removeItem('token');
+    }
+    return responce;
 })
 
 export default $api;

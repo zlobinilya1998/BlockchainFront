@@ -11,6 +11,7 @@ interface Props {
     block: boolean,
     inverted: boolean,
     noHover: boolean,
+    loading: boolean,
 }
 
 const props = defineProps<Props>()
