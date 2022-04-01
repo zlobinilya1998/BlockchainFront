@@ -1,5 +1,5 @@
 <template>
-    <transition name="fade">
+    <transition name="fade" v-bind="$attrs">
         <slot/>
     </transition>
 </template>

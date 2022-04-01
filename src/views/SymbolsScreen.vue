@@ -5,7 +5,6 @@
             Загрузить
             <c-icon v-html="'ci-refresh'"/>
         </c-btn>
-        <c-copy-btn href="http://localhost:3000"/>
         <div style="margin-top: 25px">
             <c-loader v-if="loading"/>
             <div v-else-if="symbols" class="symbols-wrapper">
@@ -19,8 +18,7 @@
 import {computed, onMounted} from "vue";
 import {useStore} from "vuex";
 import {Currency} from "@/models/Entities/Currency";
-import SymbolCard from "@/components/common/symbols/SymbolCard.vue";
-import CCopyBtn from "@/components/shared/c-copy-btn.vue";
+import SymbolCard from "@/components/symbols/SymbolCard.vue";
 
 const store = useStore();
 const loadSymbols = () => store.dispatch('loadSymbols');

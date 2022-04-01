@@ -6,17 +6,19 @@
         <c-fade-transition appear mode="out-in">
             <c-btn noHover v-if="isCopied" v-html="'Cкопировано'" class="copy-btn-tooltip" @click="isCopied = false"/>
         </c-fade-transition>
-<!--        <input-->
-<!--            :id="clipboardId"-->
-<!--            class="invisibleInput"-->
-<!--            :value="href"-->
-<!--        />-->
+        <input
+            style="display: none"
+            :id="clipboardId"
+            class="invisibleInput"
+            :value="props.href"
+        />
     </div>
 </template>
 
 <script setup lang="ts">
-import {defineProps, ref, defineEmits} from "vue";
+import {defineProps, ref, defineEmits, computed} from "vue";
 import CFadeTransition from "@/components/shared/c-fade-transition.vue";
+import {CopyFromElement} from "@/helpers";
 
 interface Props {
     href: string,
@@ -26,17 +28,19 @@ const emit = defineEmits(['click']);
 const props = defineProps<Props>();
 
 const isCopied = ref<Boolean>(false);
-
+const clipboardId = computed(() => {
+    return `copyLink#${props.href}`
+})
 
 const copy = () => {
     emit('click');
-    isCopied.value = true;
-    console.log(props.href)
-    setTimeout(() => isCopied.value = false, 3000)
-    // try {
-    //     CopyFromElement(this.clipboardId);
-    // } catch {
-    // }
+    try {
+        CopyFromElement(clipboardId.value);
+        isCopied.value = true;
+        setTimeout(() => isCopied.value = false, 3000)
+    } catch(e) {
+        console.log(e)
+    }
 }
 
 </script>

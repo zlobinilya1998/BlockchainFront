@@ -24,7 +24,7 @@ const props = defineProps<Props>()
     color: white;
     transition: .3s;
     cursor: pointer;
-    border: 1px solid transparent;
+    border: 1px solid gray;
 }
 .btn.inverted {
     background:white;

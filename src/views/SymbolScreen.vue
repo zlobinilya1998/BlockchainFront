@@ -11,7 +11,7 @@ import {onMounted, ref} from "vue";
 import {useStore} from "vuex";
 import {useRoute} from "vue-router";
 import {Currency} from "@/models/Entities/Currency";
-import SymbolCard from "@/components/common/symbols/SymbolCard.vue";
+import SymbolCard from "@/components/symbols/SymbolCard.vue";
 
 const store = useStore();
 const route = useRoute();

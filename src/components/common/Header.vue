@@ -16,6 +16,10 @@ const headerLinks: HeaderBtn[] = [
         pathName: '/',
     },
     {
+        text: 'Тренды',
+        pathName: '/trends',
+    },
+    {
         text: 'Страница иконок',
         pathName: '/admin/icons',
         icon: 'ci-cog',

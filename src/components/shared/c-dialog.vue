@@ -1,9 +1,9 @@
 <template>
     <transition name="fade" appear>
         <div v-if="props.modelValue" class="modal">
-            <div class="modal-content">
+            <div class="modal-content" :style="{maxWidth: props.maxWidth ?? '650px'}">
                 <slot/>
-                <c-icon v-html="'ci-cancel'" class="close-icon" @click="closeDialog"/>
+                <c-icon v-if="props.closable" v-html="'ci-cancel'" class="close-icon" @click="closeDialog"/>
             </div>
         </div>
     </transition>
@@ -14,6 +14,8 @@ import {defineEmits, defineProps} from "vue";
 
 interface Props {
     modelValue: boolean,
+    maxWidth?: string,
+    closable?: boolean,
 }
 
 const props = defineProps<Props>();
@@ -40,14 +42,13 @@ const closeDialog = () => emit('update:modelValue', false)
     background: #42414d;
     margin: 15% auto;
     position: relative;
-    padding: 20px;
+    padding: 30px;
     border: 1px solid #888;
-    max-width: 650px;
 }
 .close-icon {
     position: absolute;
-    right: 20px;
-    top: 50%;
+    right: 10px;
+    top: 20px;
     cursor: pointer;
     transform: translateY(-50%);
     transition: .3s;
