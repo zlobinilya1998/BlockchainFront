@@ -13,3 +13,10 @@ export class RegisterModel {
     password: string = '1234'
     email: string = "qwertin199@gmail.com"
 }
+
+
+
+export enum FormState {
+    login,
+    registration,
+}

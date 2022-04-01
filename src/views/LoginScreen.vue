@@ -8,7 +8,7 @@
                     <c-btn v-html="'Вход'" @click="login"/>
                 </div>
                 <div style="display: flex;flex-direction: column" v-else-if="state === FormState.registration">
-                    <c-btn @click="state = FormState.login" style="width: max-content;margin-bottom: 15px">
+                    <c-btn @click="setOnLogin" style="width: max-content;margin-bottom: 15px">
                         <c-icon v-html="'ci-arrow-left'"/>
                         Назад
                     </c-btn>
@@ -17,28 +17,21 @@
                     <c-input placeholder="Пароль" v-model="registerForm.password"/>
                 </div>
             </c-fade-transition>
-            <c-btn v-html="'Регистрация'" block inverted @click="state = FormState.registration" style="margin-top: 15px"/>
+            <c-btn v-html="'Регистрация'" block inverted @click="setOnRegister" style="margin-top: 15px"/>
             <c-btn v-html="'Зарегистрироваться'" @click="register"/>
         </c-dialog>
     </div>
 </template>
 
 <script lang="ts" setup>
-import CInput from "@/components/shared/c-input.vue";
-
-enum FormState {
-    login,
-    registration,
-}
 import {ref} from "vue";
 import {useStore} from "vuex";
-import {LoginModel, RegisterModel} from "@/models/Entities/User";
+import {FormState, LoginModel, RegisterModel} from "@/models/Entities/User";
 import {useRouter} from "vue-router";
 
 
 const router = useRouter();
 const store = useStore();
-
 const state = ref<FormState>(FormState.login);
 const showDialog = ref<boolean>(true)
 
@@ -46,6 +39,12 @@ const loginForm = ref<LoginModel>(new LoginModel())
 
 const registerForm = ref<RegisterModel>(new RegisterModel())
 
+const setOnLogin = () => {
+    state.value = FormState.login;
+}
+const setOnRegister = () => {
+    state.value = FormState.registration;
+}
 const login = async () => {
     try {
         await store.dispatch('login', loginForm.value);

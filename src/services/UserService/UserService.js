@@ -1,5 +1,4 @@
 import $api from "@/services/Infrastructure/Api";
-import {RegisterModel} from "@/models/Entities/User";
 import AuthService from '@/services/AuthService/AuthService'
 
 export default class UserService {
